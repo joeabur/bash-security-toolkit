@@ -6,4 +6,4 @@
 # Exit codes: 0. Security considerations: Read-only; permission errors are suppressed.
 set -Eeuo pipefail
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")/../lib" && pwd)/common.sh"
-require_commands df du; header 'Disk monitor'; df -hP | awk 'NR == 1 || $5+0 >= 80 {print}'; section 'Largest top-level directories'; du -xhd1 / 2>/dev/null | sort -h -r | head -12
+require_commands df du; header 'Disk monitor'; df -hP | awk 'NR == 1 || $5+0 >= 80 {print}'; section 'Largest top-level directories'; du -xhd1 / 2>/dev/null | sort -h -r | head -12 || true
