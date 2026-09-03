@@ -5,6 +5,7 @@
 # Inputs/options: LOG_FILE optionally selects a log file. Expected output: Log lines.
 # Exit codes: Logging functions return 0. Security considerations: Never log secrets.
 
+set -Eeuo pipefail
 : "${LOG_FILE:=}"
 log_write() { local level=$1 message=$2 line; line="$(date -u +%Y-%m-%dT%H:%M:%SZ) [$level] $message"; printf '%s\n' "$line"; [[ -n "$LOG_FILE" ]] && printf '%s\n' "$line" >> "$LOG_FILE" || true; }
 log_info() { log_write INFO "$*"; }
